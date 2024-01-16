@@ -30,9 +30,10 @@ The heatmap represents the average permutation importance for the selected digit
 with each pixel's importance depicted.
 }
 \examples{
+\dontrun{
 # Train focusing only on the digit 1 for 10 epochs
 encoderModel <- mnistAuto(numSel = 1, epochs = 10)
 vimps <- vimpEncoded(encoderModel)
 plotAvgEncoded(digitResults = vimps)
-
+}
 }

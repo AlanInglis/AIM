@@ -4,7 +4,7 @@
 \alias{plotEncoded}
 \title{Plot Feature Importance for Each Dimension}
 \usage{
-plotEncoded(digitResults, legendName = "Error", colours = c("white", "red"))
+plotEncoded(digitResults, legendName = "Error", colours = c("black", "white"))
 }
 \arguments{
 \item{digitResults}{A list obtained from the \code{vimpEncoded} function.}
@@ -28,9 +28,11 @@ dimension of the encoded data, where each plot visualizes the feature importance
 as a heatmap.
 }
 \examples{
+\dontrun{
 # Train focusing only on the digit 1 for 10 epochs
 encoderModel <- mnistAuto(numSel = 1, epochs = 10)
 vimps <- vimpEncoded(encoderModel)
 plotEncoded(digitResults = vimps)
+}
 
 }

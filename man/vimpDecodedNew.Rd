@@ -4,7 +4,12 @@
 \alias{vimpDecodedNew}
 \title{Variable Importance of Decoded Images in Autoencoder}
 \usage{
-vimpDecodedNew(encoderModel, num_permutations = 4, errorMetric = "MSE")
+vimpDecodedNew(
+  encoderModel,
+  num_permutations = 4,
+  encodingDim = 32,
+  errorMetric = "MSE"
+)
 }
 \arguments{
 \item{encoderModel}{A list containing components of the trained autoencoder model.
@@ -12,6 +17,8 @@ This should include the encoder, test data (x_test, y_test), and the autoencoder
 
 \item{num_permutations}{An integer indicating the number of permutations to be used
 for each dimension in the importance calculation. Default is 4.}
+
+\item{encodingDim}{The number of encoding dimensions.}
 
 \item{errorMetric}{A character string specifying the metric to be used for calculating error.
 Default is 'MSE' (Mean Squared Error).}
