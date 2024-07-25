@@ -22,7 +22,16 @@
 #' @export
 
 errorMetric <- function(actual, predicted, metric = "MSE") {
+  # Convert metric to uppercase for case-insensitive comparison
+  metric <- toupper(metric)
+
+  # Check if the metric is valid
+  if (!metric %in% c("MSE", "RMSE")) {
+    stop("Invalid metric. Please use 'MSE' or 'RMSE'.")
+  }
+
   err <- mean((actual - predicted)^2)
+
   if (metric == "MSE") {
     return(err)
   } else if (metric == "RMSE") {
@@ -30,3 +39,4 @@ errorMetric <- function(actual, predicted, metric = "MSE") {
     return(err)
   }
 }
+
