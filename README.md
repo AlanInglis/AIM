@@ -1,2 +1,3 @@
-# autoImp
-Examining pixel importance in auto encoders
+# AIM
+
+We introduce the AIM (Autoencoder Importance Mapping) package.... TBC
