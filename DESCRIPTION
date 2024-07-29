@@ -1,6 +1,6 @@
-Package: autoImp
+Package: aim
 Type: Package
-Title: Examines Importance For Autoencoders
+Title: Autoencoder Importance Mapping (aim). Examines Importance For Autoencoders
 Version: 0.1.0
 Author: Alan Inglis
 Maintainer: The package maintainer <alan.n.inglis@gmail.com>
