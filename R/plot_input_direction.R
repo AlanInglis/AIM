@@ -14,7 +14,7 @@
 #' @param flip_horizontal Logical. If TRUE, flips the heatmaps horizontally. Default is FALSE.
 #' @param flip_vertical Logical. If TRUE, flips the heatmaps vertically. Default is FALSE.
 #' @param rotate Integer. Specifies the rotation of the heatmaps. 0 = no rotation, 1 = 90 degrees, 2 = 180 degrees, 3 = 270 degrees. Default is 0.
-#'
+#' @param show_legend Logical. If TRUE, then show the legend.
 #' @return A grid arrangement of plots showing encoded dimension importance and pixel importance direction.
 #'
 #' @import ggplot2
@@ -33,7 +33,8 @@ plot_input_direction <- function(input_vimp,
                                  filter_zero = FALSE,
                                  flip_horizontal = FALSE,
                                  flip_vertical = FALSE,
-                                 rotate = 0) {
+                                 rotate = 0,
+                                 show_legend = FALSE) {
 
   # error check
   if (!(class %in% encoded_vimp$Class)) {
@@ -103,7 +104,7 @@ plot_input_direction <- function(input_vimp,
         scale_y_discrete(limits = rev(levels(mat_long$Var2))) +
         scale_fill_gradient2(
           low = 'blue', high = 'red', mid = 'white',
-          limits = c(min_val, max_val),
+          #limits = c(min_val, max_val),
           name = 'Pixel \nVimp \nDirection',
           guide = guide_colorbar(order = 1, frame.colour = "black", ticks.colour = "black"),
           oob = scales::squish
@@ -143,7 +144,6 @@ plot_input_direction <- function(input_vimp,
       if (flip_x) p <- suppressMessages(p + scale_x_reverse())
       if (flip_y) p <- suppressMessages(p + scale_y_reverse())
 
-
       plots[[i]] <- p
     }
 
@@ -169,6 +169,7 @@ plot_input_direction <- function(input_vimp,
   p_dec <- create_decoded_plot(data_class)
 
   heatmap_plots <- create_heatmap_plots(sorted_vimp, myVec, min_val, max_val)
+
   # Function to extract the legend from a ggplot object
   get_legend <- function(plot) {
     g <- ggplotGrob(plot)
@@ -188,13 +189,24 @@ plot_input_direction <- function(input_vimp,
   all_plot_grid <- gridExtra::arrangeGrob(grobs = heatmap_plots_no_leg, nrow = nRow)
 
   # Arrange and display plots
-  suppressMessages(
-    gridExtra::grid.arrange(
-      p_dec, all_plot_grid, legend,
-      layout_matrix = rbind(c(1, 2, 3), c(1, 2, 3)),
-      widths = c(5, 5, 1)
+  if(show_legend){
+    suppressMessages(
+      gridExtra::grid.arrange(
+        p_dec, all_plot_grid, legend,
+        layout_matrix = rbind(c(1, 2, 3), c(1, 2, 3)),
+        widths = c(5, 5, 1)
+      )
     )
-  )
+  }else{
+    suppressMessages(
+      gridExtra::grid.arrange(
+        p_dec, all_plot_grid,
+        layout_matrix = rbind(c(1, 2, 3), c(1, 2, 3)),
+        widths = c(5, 5, 0.5)
+      )
+    )
+  }
+
 }
 
 

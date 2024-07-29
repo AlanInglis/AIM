@@ -14,7 +14,8 @@ plot_input_direction(
   filter_zero = FALSE,
   flip_horizontal = FALSE,
   flip_vertical = FALSE,
-  rotate = 0
+  rotate = 0,
+  show_legend = FALSE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ plot_input_direction(
 \item{flip_vertical}{Logical. If TRUE, flips the heatmaps vertically. Default is FALSE.}
 
 \item{rotate}{Integer. Specifies the rotation of the heatmaps. 0 = no rotation, 1 = 90 degrees, 2 = 180 degrees, 3 = 270 degrees. Default is 0.}
+
+\item{show_legend}{Logical. If TRUE, then show the legend.}
 }
 \value{
 A grid arrangement of plots showing encoded dimension importance and pixel importance direction.
