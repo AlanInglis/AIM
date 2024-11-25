@@ -35,12 +35,31 @@ vimp_encoded <- function(encoder,
   # Create input layer for the encoded representation
   encoded_input <- keras::layer_input(shape = c(edim))
 
-  # Get the decoder layer from the autoencoder
-  decoder_length <- length(autoencoder$layers)
-  decoder_layer <- autoencoder$layers[[decoder_length]]
+  # # Get the decoder layer from the autoencoder
+  # decoder_length <- length(autoencoder$layers)
+  # decoder_layer <- autoencoder$layers[[decoder_length]]
+  #
+  # # Create a decoder model
+  # decoder <- keras::keras_model(inputs = encoded_input, outputs = decoder_layer(encoded_input))
 
-  # Create a decoder model
-  decoder <- keras::keras_model(inputs = encoded_input, outputs = decoder_layer(encoded_input))
+  # Identify the index of the last layer in the encoder within the autoencoder
+  decoder_start_index <- which(sapply(autoencoder$layers, function(layer) identical(layer$name, encoder$layers[[length(encoder$layers)]]$name))) + 1
+
+  # Ensure the decoder_start_index is valid
+  if (length(decoder_start_index) == 0) {
+    stop("Could not identify the start of the decoder layers. Ensure the encoder is correctly defined.")
+  }
+
+  # Extract decoder layers
+  decoder_layers <- autoencoder$layers[decoder_start_index:length(autoencoder$layers)]
+
+  # Rebuild the decoder model
+  decoded_output <- encoded_input
+  for (layer in decoder_layers) {
+    decoded_output <- layer(decoded_output)
+  }
+  decoder <- keras::keras_model(inputs = encoded_input, outputs = decoded_output)
+
 
   # Internal function to calculate permutation importance
   permImpInternal <- function(encoder, test_data, test_labels, class, num_permutations = 4, em = errorMetric) {
