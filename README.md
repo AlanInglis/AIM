@@ -32,7 +32,10 @@ The package combines the findings from both the input pixel importance and laten
 
 ### Example Usage
 
-The following code demonstartes how to use the `aim` package. In the code, we fist build a simple AE model using a single digit from the MNIST data. We then calculate the importance of both the input pixels and encoded dimesnions and visualise the results.
+The following code is a quick-start guide demonstarting how to use the `aim` package. 
+For a more detailed discussion of the functions and their arguments, see the vignette associated with this package.
+In the code, we fist build a simple AE model using the MNIST data. 
+We then calculate the importance of both the input pixels and encoded dimesnions and visualise the results.
 
 ```r
 
@@ -52,14 +55,6 @@ y_train <- mnist$train$y
 x_test <- mnist$test$x
 y_test <- mnist$test$y
 
-# filter for just digit 5
-considered_digits <- c(5)
-train_indices <- which(y_train %in% considered_digits)
-x_train <- x_train[train_indices, , ]
-y_train <- y_train[train_indices]
-test_indices <- which(y_test %in% considered_digits)
-x_test <- x_test[test_indices, , ]
-y_test <- y_test[test_indices]
 
 # Preprocess Data
 x_train <- array_reshape(x_train / 255, c(nrow(x_train), 784))
