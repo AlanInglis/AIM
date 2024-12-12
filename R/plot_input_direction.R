@@ -104,7 +104,7 @@ plot_input_direction <- function(input_vimp,
         scale_y_discrete(limits = rev(levels(mat_long$Var2))) +
         scale_fill_gradient2(
           low = 'blue', high = 'red', mid = 'white',
-          #limits = c(min_val, max_val),
+         # limits = c(min_val, max_val),
           name = 'Pixel \nVimp \nDirection',
           guide = guide_colorbar(order = 1, frame.colour = "black", ticks.colour = "black"),
           oob = scales::squish
