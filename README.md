@@ -38,7 +38,6 @@ In the code, we fist build a simple AE model using the MNIST data.
 We then calculate the importance of both the input pixels and encoded dimesnions and visualise the results.
 
 ```r
-
 library(keras)
 library(aim)
 
